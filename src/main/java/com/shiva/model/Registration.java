@@ -31,9 +31,11 @@ public class Registration {
 	private String email;
 	private String password;
 	private String gender;
+	private boolean enabled;
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "registration")
+	
 	private List<Role> roles = new ArrayList<Role>();
 
 	public Registration() {
@@ -140,12 +142,22 @@ public class Registration {
 		roles.add(newrole);
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
 		return "Registration [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", fatherName=" + fatherName + ", motherName=" + motherName + ", adharNumber=" + adharNumber
 				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", password=" + password + ", gender=" + gender
-				+ ", dob=" + dob + ", roles=" + roles + "]";
+				+ ", enabled=" + enabled + ", dob=" + dob + ", roles=" + roles + "]";
 	}
+
+
 
 }

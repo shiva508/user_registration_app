@@ -1,5 +1,6 @@
 package com.shiva.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -17,8 +18,10 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer authoriteId;
 	private String authority;
+	@Column(name="username")
+	private String userName;
 	@ManyToOne
-	@JoinColumn(name="username")
+	@JoinColumn(name="userId")
 	private Registration registration;
 	
 	public Role() {
@@ -42,9 +45,17 @@ public class Role {
 	public void setRegistration(Registration registration) {
 		this.registration = registration;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	@Override
 	public String toString() {
-		return "Role [authoriteId=" + authoriteId + ", authority=" + authority + "]";
+		return "Role [authoriteId=" + authoriteId + ", authority=" + authority + ", userName=" + userName + "]";
 	}
+	
 	
 }

@@ -22,7 +22,8 @@ public class FormDomineMapper {
 	public void mapRole() {
 		formToDomineMApperFactory.classMap(Role.class, RoleForm.class)
 				.field("authoriteId", "authoriteId")
-				.field("authority", "authority");	
+				.field("authority", "authority")
+				.field("userName", "userName");	
 	}
 
 	public void mapRegistration() {

@@ -190,7 +190,7 @@ span.psw {
     </div>
 <c:if test="${param.error!=null }">
 <div class="panel panel-danger">
-  <div class="panel-heading">${param.error}</div>
+  <div class="panel-heading">Wrong credentials</div>
 </div>
 
 </c:if>
@@ -207,8 +207,10 @@ span.psw {
 <br>
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" style="width: 347px" required>
-        
-      <button type="submit">Login</button>
+        <div style="">
+        <button type="submit">Loginscds</button>
+        </div>
+      
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>

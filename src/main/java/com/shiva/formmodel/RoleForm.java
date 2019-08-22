@@ -4,6 +4,7 @@ public class RoleForm {
 
 	private Integer authoriteId;
 	private String authority;
+	private String userName;
 
 	public RoleForm(String authority) {
 		super();
@@ -30,9 +31,16 @@ public class RoleForm {
 		this.authority = authority;
 	}
 
-	@Override
-	public String toString() {
-		return "RoleForm [authoriteId=" + authoriteId + ", authority=" + authority + "]";
+	public String getUserName() {
+		return userName;
 	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	@Override
+	public String toString() {
+		return "RoleForm [authoriteId=" + authoriteId + ", authority=" + authority + ", userName=" + userName + "]";
+	}
 }

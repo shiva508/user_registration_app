@@ -12,5 +12,6 @@ public interface RegistrationService {
 	public void updateUser(RegistrationForm registrationForm);
 	public Integer deleteUser(Integer userid);
 	public RegistrationForm getUserByEmailAndPassword(String username,String password);
+	public Long isUserExist(String username);
 	public RegistrationForm getUserByUserId(Integer userId);
 }

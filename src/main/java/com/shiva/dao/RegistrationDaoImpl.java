@@ -2,7 +2,8 @@ package com.shiva.dao;
 
 import java.util.List;
 
-
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -23,8 +24,21 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
 	public List<Registration> usersList() {
 		Session session = sessionFactory.getCurrentSession();
+		System.out.println("====================Creteria==================");
+		Criteria criteria=session.createCriteria(Registration.class);
+		criteria.setFetchMode("roles", FetchMode.EAGER);
+		criteria.list();
+		System.out.println("====================Creteria==================");
+		System.out.println("====================JoinFetch==================");
+		Query queryJoinFetch = session.createQuery("FROM Registration r join fetch r.roles Role", Registration.class);
+		queryJoinFetch.getResultList();
+		System.out.println("====================JoinFetch==================");
+		System.out.println("====================N+1==================");
 		Query query = session.createQuery("FROM Registration", Registration.class);
-		return query.getResultList();
+		List<Registration> userlist=query.getResultList();
+		System.out.println("====================N+1==================");
+		return userlist;
+		
 	}
 
 	public void updateUser(Registration registration) {
@@ -44,7 +58,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
 	public Registration getUserByEmailAndPassword(String username, String password) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT R FROM Registration R where R.email=:email AND R.password=password");
+		Query query = session.createQuery("SELECT R FROM Registration R where R.email=:email AND R.password=:password");
 		query.setParameter("email", username);
 		query.setParameter("password", password);
 		return (Registration) query.uniqueResult();
@@ -54,6 +68,13 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		Session session = sessionFactory.getCurrentSession();
 		Registration registration=session.get(Registration.class, userId);
 		return registration;
+	}
+
+	public Long isUserExist(String email) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("select count(*) from Registration r where r.email=:email");
+		query.setParameter("email", email);
+		return (Long) query.uniqueResult();
 	}
 
 }

@@ -41,8 +41,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 		List<RoleForm> roleFormlist=registrationForm.getRoles();
 		registration.setPassword(bCryptPasswordEncoderPro.bCryptPasswordEncoder(registrationForm.getPassword()));
 		registration.getRoles().clear();
+		registration.setEnabled(true);
 		for (RoleForm roleForm : roleFormlist) {
 			Role role=formDomineMapperfaced.map(roleForm, Role.class);
+			role.setUserName(registration.getEmail());
 			registration.addRoleToUser(role);
 		}
 		
@@ -86,6 +88,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 		Registration registration=registrationDao.getUserByUserId(userId);
 		registrationForm=formDomineMapperfaced.map(registration, RegistrationForm.class);
 		return registrationForm;
+	}
+	@Transactional
+	public Long isUserExist(String username) {
+		
+		return registrationDao.isUserExist(username);
 	}
 
 }

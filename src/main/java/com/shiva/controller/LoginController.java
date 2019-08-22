@@ -63,14 +63,21 @@ public class LoginController {
 	public String registration(@Valid @ModelAttribute("registration") RegistrationForm registration, Model model,
 			BindingResult result) {
 		String view = "";
-		registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
-		registrationService.saveUser(registration);
 		model.addAttribute("registration", registration);
-		if (result.hasErrors()) {
-			view = "welcome";
-		} else {
-			view = "redirect:/users";
+		Long userid=registrationService.isUserExist(registration.getEmail());
+		if(userid>0) {
+			view="UserExist";
+		}else {
+			registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
+			registrationService.saveUser(registration);
+		
+			if (result.hasErrors()) {
+				view = "welcome";
+			} else {
+				view = "redirect:/users";
+			}	
 		}
+		
 		return view;
 	}
 
