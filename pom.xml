@@ -8,10 +8,11 @@
   <name>user_registration_app Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
-
 		<springframework.version>5.0.8.RELEASE</springframework.version>
 		<hibernate.version>5.3.8.Final</hibernate.version>
 		<mysql.connector.version>8.0.11</mysql.connector.version>
+		<orika-core-version>1.5.1</orika-core-version>
+		<spring-security.version>5.0.6.RELEASE</spring-security.version>
 	</properties>
   <dependencies>
     <dependency>
@@ -101,7 +102,18 @@
 		<dependency>
 			<groupId>ma.glasnost.orika</groupId>
 			<artifactId>orika-core</artifactId>
-			<version>1.5.1</version>
+			<version>${orika-core-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
 		</dependency>
   </dependencies>
   <build>

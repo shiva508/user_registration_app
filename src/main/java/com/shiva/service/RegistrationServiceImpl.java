@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import com.shiva.config.BCryptPasswordEncoderPro;
 import com.shiva.dao.RegistrationDao;
 import com.shiva.formmodel.RegistrationForm;
+import com.shiva.formmodel.RoleForm;
 import com.shiva.model.Registration;
+import com.shiva.model.Role;
 
 import ma.glasnost.orika.MapperFacade;
 
@@ -24,11 +26,26 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private MapperFacade formDomineMapperfaced;
 	@Autowired
 	private RegistrationDao registrationDao;
+	@Autowired
+	private BCryptPasswordEncoderPro bCryptPasswordEncoderPro;
 
 	@Transactional
 	public Integer saveUser(RegistrationForm registrationForm) {
 		Registration registration=formDomineMapperfaced.map(registrationForm, Registration.class);
+		updateChildProcessor(registration,registrationForm);
+		System.out.println("ROLES:"+registration);
 		return registrationDao.saveUser(registration);
+	}
+
+	private void updateChildProcessor(Registration registration, RegistrationForm registrationForm) {
+		List<RoleForm> roleFormlist=registrationForm.getRoles();
+		registration.setPassword(bCryptPasswordEncoderPro.bCryptPasswordEncoder(registrationForm.getPassword()));
+		registration.getRoles().clear();
+		for (RoleForm roleForm : roleFormlist) {
+			Role role=formDomineMapperfaced.map(roleForm, Role.class);
+			registration.addRoleToUser(role);
+		}
+		
 	}
 
 	@Transactional

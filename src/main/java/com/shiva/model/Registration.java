@@ -3,7 +3,6 @@ package com.shiva.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,16 +19,12 @@ import javax.persistence.TemporalType;
 @Table(name = "users")
 public class Registration {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
-
 	private String firstName;
 	private String lastName;
-
 	private String fatherName;
-
 	private String motherName;
-
 	private String adharNumber;
 	private String phoneNumber;
 	@Column(name = "username")
@@ -138,6 +133,11 @@ public class Registration {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public void addRoleToUser(Role newrole) {
+		newrole.setRegistration(this);
+		roles.add(newrole);
 	}
 
 	@Override

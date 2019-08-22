@@ -1,5 +1,8 @@
 package com.shiva.formmodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegistrationForm {
 
 	private Integer userId;
@@ -12,6 +15,7 @@ public class RegistrationForm {
 	private String email;
 	private String password;
 	private String gender;
+	private List<RoleForm> roles=new ArrayList<RoleForm>();
 	public Integer getUserId() {
 		return userId;
 	}
@@ -92,12 +96,22 @@ public class RegistrationForm {
 		this.gender = gender;
 	}
 
+	public List<RoleForm> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleForm> roles) {
+		this.roles = roles;
+	}
+
 	@Override
 	public String toString() {
-		return "Registration [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
+		return "RegistrationForm [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", fatherName=" + fatherName + ", motherName=" + motherName + ", adharNumber=" + adharNumber
 				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", password=" + password + ", gender=" + gender
-				+ "]";
+				+ ", roles=" + roles + "]";
 	}
+
+	
 
 }

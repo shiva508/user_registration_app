@@ -1,5 +1,7 @@
 package com.shiva.controller;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 
 import javax.validation.Valid;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.shiva.formmodel.RegistrationForm;
-
+import com.shiva.formmodel.RoleForm;
 import com.shiva.service.RegistrationService;
 
 @Controller
@@ -61,6 +63,7 @@ public class LoginController {
 	public String registration(@Valid @ModelAttribute("registration") RegistrationForm registration, Model model,
 			BindingResult result) {
 		String view = "";
+		registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
 		registrationService.saveUser(registration);
 		model.addAttribute("registration", registration);
 		if (result.hasErrors()) {
