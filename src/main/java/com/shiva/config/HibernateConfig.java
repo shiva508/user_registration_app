@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "com.bank" })
+@ComponentScan(basePackages = { "com.shiva" })
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfig {
 	@Autowired
