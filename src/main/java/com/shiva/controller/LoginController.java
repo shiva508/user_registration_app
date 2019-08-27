@@ -70,7 +70,6 @@ public class LoginController {
 		}else {
 			registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
 			registrationService.saveUser(registration);
-		
 			if (result.hasErrors()) {
 				view = "welcome";
 			} else {
