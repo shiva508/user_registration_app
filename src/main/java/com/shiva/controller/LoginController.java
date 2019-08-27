@@ -68,7 +68,12 @@ public class LoginController {
 		if(userid>0) {
 			view="UserExist";
 		}else {
-			registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
+			if(registration.getDummyRoles().size()>0) {
+				for (String role :registration.getDummyRoles() ) {
+					registration.getRoles().add(new RoleForm("ROLE_"+role.trim()));	
+				}
+			}
+			//registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
 			registrationService.saveUser(registration);
 			if (result.hasErrors()) {
 				view = "welcome";

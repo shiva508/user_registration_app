@@ -31,11 +31,31 @@
 	value="components/css/dataTables.bootstrap.css"></spring:url>
 <spring:url var="datepickercss" value="components/css/datepicker.css"></spring:url>
 <spring:url var="select2mincss" value="components/css/select2.min.css"></spring:url>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Registration Form</title>
+
+<script src="${jquery}" type="text/javascript"></script>
+<script src="${bootstrapminjs}" type="text/javascript"></script>
+<script src="${bootstrapjs}" type="text/javascript"></script>
+<script src="${bootstrapdatepickerjs}" type="text/javascript"></script>
+<script src="${jqueryuijs}" type="text/javascript"></script>
+<script src="${jquerydataTablesminjs}" type="text/javascript"></script>
+<script src="${select2minjs}" type="text/javascript"></script>
+<script src="${sweetalertminjs}" type="text/javascript"></script>
+
+<link href="${bootstrapthemecss}" rel="stylesheet" type="text/css" />
+<link href="${bootstrapthemecssmap}" rel="stylesheet" type="text/css" />
+<link href="${bootstrapthememincss}" rel="stylesheet" type="text/css" />
+<link href="${bootstrapcss}" rel="stylesheet" type="text/css" />
+<link href="${bootstrapmincss}" rel="stylesheet" type="text/css" />
+<link href="${dataTablesbootstrapcss}" rel="stylesheet" type="text/css" />
+<link href="${datepickercss}" rel="stylesheet" type="text/css" />
+<link href="${select2mincss}" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
@@ -127,29 +147,23 @@
 						</form:select>
 					</div>
 				</div>
+					<div class="col-sm-6">
+					<div class="form-group">
+					<label for="exampleInputPassword1">Roles</label> 
+						<form:select class="js-example-basic-single-multi" path="dummyRoles" multiple="multiple">
+							<option value="USER">User</option>
+							<option value="ADMIN">Admin</option>
+							<option value="R&D">R&D</option>
+						</form:select>
+					</div>
+				</div>
 				
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form:form>
 		</div>
 	</div>
 </body>
-<script src="${jquery}" type="text/javascript"></script>
-<script src="${bootstrapminjs}" type="text/javascript"></script>
-<script src="${bootstrapjs}" type="text/javascript"></script>
-<script src="${bootstrapdatepickerjs}" type="text/javascript"></script>
-<script src="${jqueryuijs}" type="text/javascript"></script>
-<script src="${jquerydataTablesminjs}" type="text/javascript"></script>
-<script src="${select2minjs}" type="text/javascript"></script>
-<script src="${sweetalertminjs}" type="text/javascript"></script>
 
-<link href="${bootstrapthemecss}" rel="stylesheet" type="text/css" />
-<link href="${bootstrapthemecssmap}" rel="stylesheet" type="text/css" />
-<link href="${bootstrapthememincss}" rel="stylesheet" type="text/css" />
-<link href="${bootstrapcss}" rel="stylesheet" type="text/css" />
-<link href="${bootstrapmincss}" rel="stylesheet" type="text/css" />
-<link href="${dataTablesbootstrapcss}" rel="stylesheet" type="text/css" />
-<link href="${datepickercss}" rel="stylesheet" type="text/css" />
-<link href="${select2mincss}" rel="stylesheet" type="text/css" />
 
 
 
@@ -160,11 +174,16 @@
 	font-style: italic;
 	font-weight: bold;
 }
+.select2 {
+    width: 128px !important;
+    height:50px !important;
+}
 </style>
 <script>
 	$(document).ready(function() {
 		$(document).ready(function() {
 			$('.js-example-basic-single').select2();
+			$('.js-example-basic-single-multi').select2();
 		});
 		$("#datepicker").datepicker({ 
 	        autoclose: true, 

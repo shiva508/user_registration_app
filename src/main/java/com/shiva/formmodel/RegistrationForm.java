@@ -16,6 +16,7 @@ public class RegistrationForm {
 	private String password;
 	private boolean enabled;
 	private String gender;
+	public List<String> dummyRoles=new ArrayList<String>();
 	private List<RoleForm> roles=new ArrayList<RoleForm>();
 	public Integer getUserId() {
 		return userId;
@@ -113,12 +114,19 @@ public class RegistrationForm {
 		this.enabled = enabled;
 	}
 
+	public List<String> getDummyRoles() {
+		return dummyRoles;
+	}
+
+	public void setDummyRoles(List<String> dummyRoles) {
+		this.dummyRoles = dummyRoles;
+	}
+
 	@Override
 	public String toString() {
 		return "RegistrationForm [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", fatherName=" + fatherName + ", motherName=" + motherName + ", adharNumber=" + adharNumber
 				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", password=" + password + ", enabled="
-				+ enabled + ", gender=" + gender + ", roles=" + roles + "]";
+				+ enabled + ", gender=" + gender + ", dummyRoles=" + dummyRoles + ", roles=" + roles + "]";
 	}
-
 }
