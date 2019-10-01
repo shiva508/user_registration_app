@@ -35,7 +35,6 @@ public class Registration {
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "registration")
-	
 	private List<Role> roles = new ArrayList<Role>();
 
 	public Registration() {
