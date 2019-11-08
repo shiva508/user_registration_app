@@ -1,10 +1,12 @@
 package com.shiva.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -41,8 +43,14 @@ public class UserAppWebConfigur extends WebMvcConfigurerAdapter {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
-	}
 	
+	}
+	@Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("messages");
+        return messageSource;
+    }
 	public HttpEntity<String> httpEntity() {
 		HttpHeaders handler=new HttpHeaders();
 		handler.set("Authorization", environment.getProperty("ASANA_ACCESS_TOKEN"));

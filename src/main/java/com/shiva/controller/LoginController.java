@@ -1,14 +1,12 @@
 package com.shiva.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.validation.Valid;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.shiva.formmodel.RegistrationForm;
 import com.shiva.formmodel.RoleForm;
 import com.shiva.model.onetoone.AccountEntity;
@@ -30,6 +27,7 @@ import com.shiva.service.RegistrationService;
 
 @Controller
 public class LoginController {
+
 	@Autowired
 	private RegistrationService registrationService;
 	@Autowired
@@ -70,24 +68,27 @@ public class LoginController {
 	public String registration(@Valid @ModelAttribute("registration") RegistrationForm registration, Model model,
 			BindingResult result) {
 		String view = "";
+		System.out.println(registration);
 		model.addAttribute("registration", registration);
-		Long userid=registrationService.isUserExist(registration.getEmail());
-		if(userid>0) {
-			view="UserExist";
-		}else {
-			if(registration.getDummyRoles().size()>0) {
-				for (String role :registration.getDummyRoles() ) {
-					registration.getRoles().add(new RoleForm("ROLE_"+role.trim()));	
+	
+		if (result.hasErrors()) {
+			view = "welcome";
+		} else {
+			Long userid=registrationService.isUserExist(registration.getEmail());
+			view = "redirect:/users";
+			if(userid>0) {
+				view="UserExist";
+			}else {
+				if(registration.getDummyRoles().size()>0) {
+					for (String role :registration.getDummyRoles() ) {
+						registration.getRoles().add(new RoleForm("ROLE_"+role.trim()));	
+					}
 				}
+				//registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
+				registrationService.saveUser(registration);	
 			}
-			//registration.setRoles(Arrays.asList(new RoleForm("ROLE_USER"),new RoleForm("ROLE_ADMIN")));
-			registrationService.saveUser(registration);
-			if (result.hasErrors()) {
-				view = "welcome";
-			} else {
-				view = "redirect:/users";
-			}	
 		}
+		
 		
 		return view;
 	}

@@ -37,8 +37,8 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "LAST_NAME", unique = false, nullable = false, length = 100)
 	private String lastName;
 	
-	@OneToOne
-	@JoinColumn(name="ACCOUNT_ID")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="ACCOUNT_ID",referencedColumnName="ID")
 	private AccountEntity account;
 
 	public Integer getEmployeeId() {

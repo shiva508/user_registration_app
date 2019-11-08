@@ -27,17 +27,29 @@ public class EmployeeEntityJoinTable implements Serializable {
 	@Column(name = "ID", unique = true, nullable = false)
 	private Integer employeeId;
 
-	@Column(name = "EMAIL", unique = false, nullable = false, length = 100)
+	@Column(
+			name = "EMAIL", 
+			unique = false, 
+			nullable = false, 
+			length = 100)
 	private String email;
 
-	@Column(name = "FIRST_NAME", unique = false, nullable = false, length = 100)
+	@Column(
+			name = "FIRST_NAME", 
+			unique = false, 
+			nullable = false, 
+			length = 100)
 	private String firstName;
 
 	@Column(name = "LAST_NAME", unique = false, nullable = false, length = 100)
 	private String lastName;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="EMPLOYEEJOIN_ACCCOUNT", joinColumns = @JoinColumn(name="EMPLOYEE_ID"), inverseJoinColumns = @JoinColumn(name="ACCOUNT_ID"))
+	@JoinTable(
+			name="EMPLOYEEJOIN_ACCCOUNT", 
+			joinColumns = @JoinColumn(name="EMPLOYEE_ID"), 
+			inverseJoinColumns = @JoinColumn(name="ACCOUNT_ID")
+			)
 	private AccountEntityJoinTable account;
 
 	public Integer getEmployeeId() {

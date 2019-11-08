@@ -1,7 +1,6 @@
 package com.shiva.dao;
 
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -24,19 +23,19 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
 	public List<Registration> usersList() {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("====================Creteria==================");
+		System.out.println("====================Creteria-START==================");
 		Criteria criteria=session.createCriteria(Registration.class);
 		criteria.setFetchMode("roles", FetchMode.EAGER);
 		criteria.list();
-		System.out.println("====================Creteria==================");
-		System.out.println("====================JoinFetch==================");
+		System.out.println("====================Creteria-END==================");
+		System.out.println("====================JoinFetch-START==================");
 		Query queryJoinFetch = session.createQuery("FROM Registration r join fetch r.roles Role", Registration.class);
 		queryJoinFetch.getResultList();
-		System.out.println("====================JoinFetch==================");
-		System.out.println("====================N+1==================");
+		System.out.println("====================JoinFetch-END==================");
+		System.out.println("====================N+1-START==================");
 		Query query = session.createQuery("FROM Registration", Registration.class);
 		List<Registration> userlist=query.getResultList();
-		System.out.println("====================N+1==================");
+		System.out.println("====================N+1-END==================");
 		return userlist;
 		
 	}
