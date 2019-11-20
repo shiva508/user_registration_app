@@ -2,7 +2,9 @@ package com.shiva.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.itextpdf.text.Document;
 import com.shiva.formmodel.RegistrationForm;
 import com.shiva.formmodel.RoleForm;
 import com.shiva.model.onetoone.AccountEntity;
 import com.shiva.model.onetoone.EmployeeEntity;
+import com.shiva.model.onetoone.ParentSPK;
 import com.shiva.service.EmployeeEntityService;
 import com.shiva.service.RegistrationService;
 
@@ -32,6 +37,8 @@ public class LoginController {
 	private RegistrationService registrationService;
 	@Autowired
 	private EmployeeEntityService employeeEntityService;
+	@Autowired
+	private com.shiva.reports.ReportGenerator reportGenerator;
 	@GetMapping(value = "/")
 	public String welcomePage(Model model) {
 		RegistrationForm registration = new RegistrationForm();
@@ -131,5 +138,13 @@ public class LoginController {
 	@ResponseBody
 	public ResponseEntity<List<EmployeeEntity>> getEmp(){
 		return new ResponseEntity<List<EmployeeEntity>>(employeeEntityService.employeeEntities(), HttpStatus.OK);
+	}
+	
+	public ResponseEntity<List<ParentSPK>> spk(){
+		return null;
+	}
+	@GetMapping("/download")
+	public void download(HttpServletRequest request,HttpServletResponse response) {
+		reportGenerator.preparePdf(request,response );
 	}
 }

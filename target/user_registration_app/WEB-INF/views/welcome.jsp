@@ -57,6 +57,12 @@
 <link href="${select2mincss}" rel="stylesheet" type="text/css" />
 
 </head>
+<style>
+ 
+    .error {
+        color: #ff0000;
+    }
+</style>
 <body>
 	<jsp:include page="header.jsp" flush="true"></jsp:include>
 	<div class="container">

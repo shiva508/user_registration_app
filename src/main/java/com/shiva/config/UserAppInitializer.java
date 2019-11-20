@@ -6,7 +6,7 @@ public class UserAppInitializer extends AbstractAnnotationConfigDispatcherServle
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {UserAppWebConfigur.class};
+		return new Class[] {UserAppWebConfigure.class};
 	}
 
 	@Override
